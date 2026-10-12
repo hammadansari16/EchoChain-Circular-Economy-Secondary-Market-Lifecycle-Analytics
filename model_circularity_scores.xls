@@ -1,0 +1,6 @@
+model,critical_failure_rate_pct,avg_salvageable_resale_retention_pct,circularity_score,recommend_buyback_program
+Dell XPS 15,13.1,70.8,9.3,True
+Acer Aspire 5,9.8,66.9,6.6,True
+Asus VivoBook 15,10.0,63.8,6.4,True
+HP Pavilion 14,7.6,64.6,4.9,False
+Lenovo ThinkPad T14,4.9,65.0,3.2,False
