@@ -137,20 +137,25 @@ Repository structure
 
 Design decisions
 Simulated listings. Marketplace sites restrict scraping in their terms of service, so the listings are generated with the same shape and messiness a real scrape would have. To use real data, replace generate_scraped_listings() with a compliant scraper or an official marketplace API that writes the same columns. The rest of the pipeline is unchanged.
+
 pandas and SQLite at this scale. With 600 listings these are the right tools. The transforms (clean, match, aggregate, score) are written as separate functions so they could be ported to a distributed engine if the volume grew.
+
 A bug worth knowing about. RapidFuzz's process.extractOne does not lowercase the choices by default. Comparing lowercased titles with mixed-case model names silently dropped every Dell listing until the matcher was fixed with processor=utils.default_process.
+
 Limitations
 Simulated data. The BOM, warranty rates and listings are generated, so the ranking shows the method, not real findings about these laptops.
 Simple score. It multiplies two rates. It ignores sales volume, refurbishment labour and logistics cost, so a high-scoring model with low volume may not be worth a program.
 Asking prices. Secondary listings show asking prices, not final sale prices.
 Judgement thresholds. The 8% and 40% cut-offs are placeholders for a business rule. HP Pavilion 14 becomes a candidate if the failure threshold is lowered slightly.
 No time dimension. Listings have no scrape date, so trends over time are not analysed.
+
 Possible improvements
 Replace the simulated listings with a real marketplace API or compliant scraper
 Weight the score by sales volume and add refurbishment cost to get a profit estimate
 Add unit weights to estimate landfill diversion in tonnes
 Fuzzy-match component keywords too, and route low-confidence matches to a review queue
 Schedule the pipeline and track scores over time
+
 Acknowledgements
 
 Thanks to Infotact Solutions Pvt. Ltd. for the internship opportunity and project brief, for guidance, and to my teammates.
